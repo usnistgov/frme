@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Friction Ridge Metadata Explorer</title>
+
+	<!-- Application code -->
+	<script src="wasm/frme_wasm.js"></script>
+	<script src="js/frme_client.min.js"></script>
+	<script src="js/frme_explanations.min.js"></script>
+
+	<!-- Popover (must come before Bootstrap) -->
+	<script src="https://unpkg.com/@popperjs/core@2" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" integrity="sha384-Ay26V7L8bsJTsX9Sxclnvsn+hkdiwRnrjZJXqKmkIDobPgIIWBOVguEcQQLDuhfN" crossorigin="anonymous">
+
+	<!-- NIST-required header/footer -->
+	<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha384-NXgwF8Kv9SSAr+jemKKcbvQsz+teULH/a5UNJvZc6kP47hZgl62M1vGnw6gHQhb1" crossorigin="anonymous" defer="defer"></script>
+	<script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" defer="defer"></script>
+
+	<!-- Dark mode switcher -->
+	<script src="js/darkmode.min.js" defer="defer"></script>
+
+	<!-- Application styles -->
+	<link rel="stylesheet" href="static/styles/frme.css">
+
+	<!-- Favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="static/favicon/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="static/favicon/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="static/favicon/manifest.json">
+	<link rel="mask-icon" href="static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="static/favicon/favicon.ico">
+	<meta name="apple-mobile-web-app-title" content="Friction Ridge Metadata Explorer">
+	<meta name="application-name" content="Friction Ridge Metadata Explorer">
+	<meta name="msapplication-config" content="static/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+</head>
+<body onload="showOfflineAlert()">
+<div class="container ml-5 mr-5 mb-5 mt-1">
+	<h1 class="display-6">Friction Ridge Metadata Explorer</h1>
+	<p class="lead">Explore the <i>standardized</i> friction ridge contents of your ANSI/NIST-ITL (e.g., EBTS) files.</p>
+	<div class="alert alert-primary alert-dismissible fade show" role="alert" id="offlineAlert">
+		<strong><i class="bi bi-info-circle-fill"></i> Note:</strong> Data is processed completely in <em>your</em> web browser and <strong>never</strong> leaves your device. Don't take our word for it&mdash;turn off Wi-Fi or <a href="https://github.com/usnistgov/frme" class="alert-link" target="_blank">view the source code</a>.
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="offlineAlertClosed()"></button>
+	</div>
+
+	<div id="dropFile" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="removeHighlight(event)" class="container text-center pt-2">
+		<p class="small">
+			Drag &amp; drop ANSI/NIST-ITL files here, <em>or</em>
+		</p>
+		<p>
+			<label class="btn btn-primary" for="file_selector"><i class="bi bi-file-earmark-arrow-up-fill"></i> Choose file</label>
+			<input id="file_selector" type="file" onchange="attachFileInput(this);" style="display:none;">
+		</p>
+	</div>
+
+	<div class="container d-none" id="results_container">
+		<hr>
+		<div class="row">
+			<div class="col mb-3" id="statusColumn">
+				<span id="status_message"></span>
+			</div>
+			<div class="col mb-3" id="imageColumn">
+				<canvas id="decoded_image" width="500" height="500" class="mx-auto d-block"></canvas>
+				<div class="text-center mt-3" id="recordNumberBlock"></div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col mt-3">
+				<p><small class="text-body-tertiary">This tool inspects <i>documented</i> fields of ANSI/NIST-ITL Type 9 <strong>only</strong>, and displays images found in ANSI/NIST-ITL Types 3&ndash;6, 13&ndash;15. There may be metadata stored in Type 2 or images stored in Type 7, both "user-defined" types. While these types may be documented and publicly available, they are not parsed by this tool.</small></p>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

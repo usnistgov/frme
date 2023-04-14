@@ -1,0 +1,10 @@
+#dropFile {
+	border: 2px dashed #ccc;
+	border-radius: 20px;
+}
+#dropFile.highlight {
+	border-color: purple;
+}
+#decoded_image {
+	outline:2px dashed #ccc;
+}
