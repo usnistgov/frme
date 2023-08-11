@@ -12,7 +12,8 @@ This tool also requires Biometric Evaluation framework, whose dependencies
 need to be compiled to WebAssembly.
 
 <details>
-<summary>**Example dependency build instructions**</summary>
+<summary><strong>Example dependency build instructions</strong></summary>
+
 ### Emscripten SDK
 
 ```sh
