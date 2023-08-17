@@ -108,23 +108,25 @@ function removeUpload(path)
 /** Display the version number on the page. */
 function showVersion()
 {
-	var version = document.getElementById("version")
+	var versionContainer = document.getElementById("version-container")
 
 	/* If CMake didn't configure the version number, don't show it */
 	if (FrictionRidgeMetadataExplorerVersion == "" ||
 	    FrictionRidgeMetadataExplorerVersion.includes("@") ||
 	    FrictionRidgeMetadataExplorerVersion.includes("$")) {
-		version.classList.append("d-none")
+		versionContainer.classList.append("d-none")
 		return
 	}
 
-	while (version.classList.contains("d-none")) {
-		version.classList.remove("d-none")
+	while (versionContainer.classList.contains("d-none")) {
+		versionContainer.classList.remove("d-none")
 	}
 
+	var version = document.getElementById("version")
 	version.innerHTML = 'git commit <a href="https://github.com/' +
 	    "usnistgov/frme/commit/" + FrictionRidgeMetadataExplorerVersion +
-	    '" target="_blank" class="link-underline-light link-secondary" >' + FrictionRidgeMetadataExplorerVersion + "</a>"
+	    '" target="_blank" class="link-underline-light link-secondary" >' +
+	    FrictionRidgeMetadataExplorerVersion + "</a>"
 }
 
 ////////////////////////////////////////////////////////////////////////////////
