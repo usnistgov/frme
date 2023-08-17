@@ -3,7 +3,7 @@ import * as FRME from './frme_client.min.js';
 /*
  * Bind listeners
  */
-document.body.addEventListener('load', FRME.onInitialPageLoad)
+document.addEventListener('DOMContentLoaded', FRME.onInitialPageLoad)
 
 document.getElementById('dropFile').addEventListener('drop',
     function(e) { FRME.drop(e); } )
