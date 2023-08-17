@@ -10,9 +10,7 @@
 
 	<!-- Application code -->
 	<script src="wasm/frme_wasm.js"></script>
-	<script src="js/frme_client.min.js"></script>
-	<script src="js/frme_explanations.min.js"></script>
-	<script src="js/version.min.js"></script>
+	<script type="module" src="js/frme_module.min.js"></script>
 
 	<!-- Popover (must come before Bootstrap) -->
 	<script src="https://unpkg.com/@popperjs/core@2" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -45,22 +43,22 @@
 	<meta name="msapplication-config" content="static/favicon/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
 </head>
-<body onload="onInitialPageLoad()">
+<body>
 <div class="container ml-5 mr-5 mb-5 mt-1">
 	<h1 class="display-6">Friction Ridge Metadata Explorer</h1>
 	<p class="lead">Explore the <i>standardized</i> friction ridge contents of your ANSI/NIST-ITL (e.g., EBTS) files.</p>
 	<div class="alert alert-primary alert-dismissible fade show" role="alert" id="offlineAlert">
 		<strong><i class="bi bi-info-circle-fill"></i> Note:</strong> Data is processed completely in <em>your</em> web browser and <strong>never</strong> leaves your device. Don't take our word for it&mdash;turn off Wi-Fi or <a href="https://github.com/usnistgov/frme" class="alert-link" target="_blank">view the source code</a>.
-		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="offlineAlertClosed()"></button>
+		<button id="offlineCloseButton" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
 
-	<div id="dropFile" ondrop="drop(event)" ondragover="allowDrop(event)" ondragleave="removeHighlight(event)" class="container text-center pt-2">
+	<div id="dropFile" class="container text-center pt-2">
 		<p class="small">
 			Drag &amp; drop ANSI/NIST-ITL files here, <em>or</em>
 		</p>
 		<p>
 			<label class="btn btn-primary" for="file_selector"><i class="bi bi-file-earmark-arrow-up-fill"></i> Choose file</label>
-			<input id="file_selector" type="file" onchange="attachFileInput(this);" style="display:none;">
+			<input id="file_selector" type="file" style="display:none;">
 		</p>
 	</div>
 

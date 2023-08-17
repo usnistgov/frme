@@ -87,7 +87,7 @@ configure_file(${PROJECT_SOURCE_DIR}/../js/version.js.in ${PROJECT_SOURCE_DIR}/.
 #
 # Minify the JavaScript
 #
-set(JS_SOURCES darkmode.js frme_client.js frme_explanations.js gtag.js)
+set(JS_SOURCES darkmode.js frme_client.js frme_explanations.js frme_module.js gtag.js)
 if (EXISTS ${PROJECT_SOURCE_DIR}/../js/version.js)
 	list(APPEND JS_SOURCES version.js)
 endif()

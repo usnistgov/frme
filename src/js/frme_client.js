@@ -8,6 +8,9 @@
  * about its quality, reliability, or any other characteristic.
  */
 
+import { FrictionRidgeMetadataExplorerVersion } from './version.min.js';
+import { FRME_EXPLANATIONS } from './frme_explanations.min.js';
+
 var FrictionRidgeMetadataExplorerVars = {
 	records: null,
 	currentRecordNumber: 0
@@ -21,18 +24,18 @@ var FrictionRidgeMetadataExplorerVars = {
  * Drag and drop support
  ******************************************************************************/
 
-function allowDrop(event)
+export function allowDrop(event)
 {
 	event.preventDefault();
 	event.target.classList.add('highlight');
 }
 
-function removeHighlight(event)
+export function removeHighlight(event)
 {
 	event.target.classList.remove('highlight');
 }
 
-function drop(event)
+export function drop(event)
 {
 	event.preventDefault();
 	attachFileInput(event.dataTransfer);
@@ -326,7 +329,7 @@ function offlineAlertClosed()
  ******************************************************************************/
 
 /** Things to do when the page initially loads. */
-function onInitialPageLoad()
+export function onInitialPageLoad()
 {
 	showOfflineAlert()
 	showVersion()
@@ -473,7 +476,7 @@ function configureRecordNumberChooser()
 
 	var select = document.createElement("select");
 	select.id = "recordNumberSelector"
-	select.setAttribute("onchange", "updateRecordNumber()");
+	select.addEventListener("change", updateRecordNumber);
 
 	for (var i = 1; i <= FrictionRidgeMetadataExplorerVars.records.size();
 	    ++i) {
@@ -919,7 +922,7 @@ function generateModalForExplanationWithLink(link_text, explanation,
 *******************************************************************************/
 
 /** On file upload, process and display the record */
-function attachFileInput(fileInput) {
+export function attachFileInput(fileInput) {
 	const uploadedImageFileName = 'UPLOAD';
 	const uploadedFilePath = '/' + uploadedImageFileName;
 
