@@ -22,7 +22,7 @@ const FRME_NEUTRAL_COLOR = "info"
 const FRME_SUCCESS_COLOR  = "success"
 const FRME_QUESTIONABLE_COLOR = "secondary"
 
-const FRME_EXPLANATIONS = {
+export const FRME_EXPLANATIONS = {
 	long: {
 		proprietary_and_open:
 		{
