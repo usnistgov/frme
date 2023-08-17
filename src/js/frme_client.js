@@ -127,7 +127,7 @@ function showVersion()
 
 	var version = document.getElementById("version")
 	version.innerHTML = 'git commit <a href="https://github.com/' +
-	    "usnistgov/frme/commit/" + FrictionRidgeMetadataExplorerVersion +
+	    "usnistgov/frme/tree/" + FrictionRidgeMetadataExplorerVersion +
 	    '" target="_blank" class="link-underline-light link-secondary" >' +
 	    FrictionRidgeMetadataExplorerVersion + "</a>"
 }
