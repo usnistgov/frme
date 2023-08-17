@@ -74,7 +74,7 @@ target_link_libraries(${WASM_TARGET}
 #
 # Minify the JavaScript
 #
-set(JS_SOURCES darkmode.js frme_client.js frme_explanations.js)
+set(JS_SOURCES darkmode.js frme_client.js frme_explanations.js gtag.js)
 find_program(TERSER terser
     HINTS ${EMSCRIPTEN_SYSROOT}/../../node_modules/terser/bin/)
 if (TERSER)
