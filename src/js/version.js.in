@@ -1,1 +1,1 @@
-FrictionRidgeMetadataExplorerVersion = "@FRME_GIT_HASH@"
+const FrictionRidgeMetadataExplorerVersion = "@FRME_GIT_HASH@"
