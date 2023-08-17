@@ -72,9 +72,25 @@ target_link_libraries(${WASM_TARGET}
     biomeval::biomeval)
 
 #
+# Embed git commit hash in version.js
+#
+set(FRME_GIT_HASH "")
+execute_process(COMMAND git rev-parse --short HEAD OUTPUT_VARIABLE gitOut ERROR_VARIABLE gitErr WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+if("${gitErr}" STREQUAL "" AND NOT "${gitOut}" STREQUAL "")
+	string(REGEX REPLACE "(\r?\n)+$" "" FRME_GIT_HASH "${gitOut}")
+	message(STATUS "Embedding git commit hash \"${FRME_GIT_HASH}\"")
+else()
+	set(FRME_GIT_HASH "")
+endif()
+configure_file(${PROJECT_SOURCE_DIR}/../js/version.js.in ${PROJECT_SOURCE_DIR}/../js/version.js)
+
+#
 # Minify the JavaScript
 #
 set(JS_SOURCES darkmode.js frme_client.js frme_explanations.js gtag.js)
+if (EXISTS ${PROJECT_SOURCE_DIR}/../js/version.js)
+	list(APPEND JS_SOURCES version.js)
+endif()
 find_program(TERSER terser
     HINTS ${EMSCRIPTEN_SYSROOT}/../../node_modules/terser/bin/)
 if (TERSER)

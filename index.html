@@ -12,6 +12,7 @@
 	<script src="wasm/frme_wasm.js"></script>
 	<script src="js/frme_client.min.js"></script>
 	<script src="js/frme_explanations.min.js"></script>
+	<script src="js/version.min.js"></script>
 
 	<!-- Popover (must come before Bootstrap) -->
 	<script src="https://unpkg.com/@popperjs/core@2" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -44,7 +45,7 @@
 	<meta name="msapplication-config" content="static/favicon/browserconfig.xml">
 	<meta name="theme-color" content="#ffffff">
 </head>
-<body onload="showOfflineAlert()">
+<body onload="onInitialPageLoad()">
 <div class="container ml-5 mr-5 mb-5 mt-1">
 	<h1 class="display-6">Friction Ridge Metadata Explorer</h1>
 	<p class="lead">Explore the <i>standardized</i> friction ridge contents of your ANSI/NIST-ITL (e.g., EBTS) files.</p>
@@ -80,6 +81,7 @@
 		<div class="row">
 			<div class="col mt-3">
 				<p><small class="text-body-tertiary">This tool inspects <i>documented</i> fields of ANSI/NIST-ITL Type 9 <strong>only</strong>, and displays images found in ANSI/NIST-ITL Types 3&ndash;6, 13&ndash;15. There may be metadata stored in Type 2 or images stored in Type 7, both "user-defined" types. While these types may be documented and publicly available, they are not parsed by this tool.</small></p>
+				<p class="text-end fw-lighter text-body-tertiary"><small class="d-none" id="version"></small></p>
 			</div>
 		</div>
 	</div>

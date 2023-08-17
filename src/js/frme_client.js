@@ -105,6 +105,28 @@ function removeUpload(path)
 	FS.unlink(path);
 }
 
+/** Display the version number on the page. */
+function showVersion()
+{
+	var version = document.getElementById("version")
+
+	/* If CMake didn't configure the version number, don't show it */
+	if (FrictionRidgeMetadataExplorerVersion == "" ||
+	    FrictionRidgeMetadataExplorerVersion.includes("@") ||
+	    FrictionRidgeMetadataExplorerVersion.includes("$")) {
+		version.classList.append("d-none")
+		return
+	}
+
+	while (version.classList.contains("d-none")) {
+		version.classList.remove("d-none")
+	}
+
+	version.innerHTML = 'git commit <a href="https://github.com/' +
+	    "usnistgov/frme/commit/" + FrictionRidgeMetadataExplorerVersion +
+	    '" target="_blank" class="link-underline-light link-secondary" >' + FrictionRidgeMetadataExplorerVersion + "</a>"
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -300,6 +322,13 @@ function offlineAlertClosed()
 /******************************************************************************
  * Drawing
  ******************************************************************************/
+
+/** Things to do when the page initially loads. */
+function onInitialPageLoad()
+{
+	showOfflineAlert()
+	showVersion()
+}
 
 /** Reset interface to unused state */
 function resetInterface()
